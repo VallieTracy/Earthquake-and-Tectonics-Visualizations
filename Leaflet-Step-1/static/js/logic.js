@@ -1,5 +1,5 @@
 // Store API endpoint inside queryUrl
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson";
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
 function markerSize(magnitude) {
   return magnitude * 250;
@@ -18,13 +18,13 @@ d3.json(queryUrl, function(data) {
     for (var i = 0; i < features.length; i++) {
       
       var intensity = "";
-      if (features[i].properties.mag > 5.1) {
+      if (features[i].properties.mag > 4.5) {
         intensity = "yellow";
       }
-      else if (features[i].properties.mag > 4.8) {
+      else if (features[i].properties.mag > 3) {
         intensity = "blue";
       }
-      else if (features[i].properties.mag > 4.6) {
+      else if (features[i].properties.mag > 1.7) {
         intensity = "red";
       }
       else {
@@ -81,9 +81,9 @@ d3.json(queryUrl, function(data) {
     // Create our map, giving it the streetmap and earthquakes layers to display on load
     var myMap = L.map("map", {
       center: [
-        30, 21
+        38, -97
       ],
-      zoom: 3,
+      zoom: 5,
       layers: [light, earthquakeLayer]
     });
    
