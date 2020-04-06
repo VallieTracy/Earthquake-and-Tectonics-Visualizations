@@ -1,6 +1,10 @@
 // Store API endpoint inside queryUrl
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson";
 
+function markerSize(magnitude) {
+  return magnitude * 250;
+}
+
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
     var features = data.features;
@@ -13,27 +17,28 @@ d3.json(queryUrl, function(data) {
     var earthquakeCoords = [];
     for (var i = 0; i < features.length; i++) {
       
-      // var color = "";
-      // if (features[i].properties.mag > 5.1) {
-      //   color = "yellow";
-      // }
-      // else if (features[i].properties.mag > 4.8) {
-      //   color = "blue";
-      // }
-      // else if (features[i].properties.mag > 4.6) {
-      //   color = "red";
-      // }
-      // else {
-      //   color = "green";
-      // }
+      var intensity = "";
+      if (features[i].properties.mag > 5.1) {
+        intensity = "yellow";
+      }
+      else if (features[i].properties.mag > 4.8) {
+        intensity = "blue";
+      }
+      else if (features[i].properties.mag > 4.6) {
+        intensity = "red";
+      }
+      else {
+        intensity = "green";
+      }
+      console.log("Earthquake", i);
+      console.log(features[i].properties.mag);
       
 
       earthquakeCoords.push(
         L.circle([features[i].geometry.coordinates[1],
           features[i].geometry.coordinates[0]], {
-            color: "red",
-            
-            radius: 1000
+            color: intensity,
+            radius: markerSize(features[i].properties.mag * 200)
           }).bindPopup("<p>" + "<b>LOCATION:</b> " + features[i].properties.place + "<br>" 
                     + "<b>MAGNITUDE:</b> " + features[i].properties.mag + "<br>"
                     + "<b>LONGITUDE:</b> " + features[i].geometry.coordinates[0] + "<br>"
@@ -43,8 +48,7 @@ d3.json(queryUrl, function(data) {
       );
 
     } // end of the for-loop
-
-    var earthquakeLayer = L.layerGroup(earthquakeCoords);
+    
 
     // Define variables for our tile layers
     var light = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -60,7 +64,9 @@ d3.json(queryUrl, function(data) {
       id: "mapbox.dark",
       accessToken: API_KEY
     });
-
+ 
+    var earthquakeLayer = L.layerGroup(earthquakeCoords);
+  
     // Only one base layer can be shown at a time
     var baseMaps = {
       BLAH: light,
@@ -69,9 +75,9 @@ d3.json(queryUrl, function(data) {
 
     // Overlays that may be toggled on or off
     var overlayMaps = {
-      Earthquakes: earthquakeLayer
+      "Earthquakes": earthquakeLayer
     }; 
-    
+     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
     var myMap = L.map("map", {
       center: [
@@ -80,7 +86,7 @@ d3.json(queryUrl, function(data) {
       zoom: 3,
       layers: [light, earthquakeLayer]
     });
-
+   
     L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
 }); // end of d3.json
