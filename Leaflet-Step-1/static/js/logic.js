@@ -2,7 +2,7 @@
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
 function markerSize(magnitude) {
-  return magnitude * 250;
+  return magnitude * 150;
 }
 
 // Perform a GET request to the query URL
@@ -15,20 +15,43 @@ d3.json(queryUrl, function(data) {
     console.log("LONGITUDE[0]:",features[0].geometry.coordinates[0]);
     /////////
     var earthquakeCoords = [];
+    
     for (var i = 0; i < features.length; i++) {
       
       var intensity = "";
-      if (features[i].properties.mag > 4.5) {
-        intensity = "yellow";
+      
+      if (features[i].properties.mag > 5.5) {
+        intensity = "#4d0000";
+      }
+      else if (features[i].properties.mag > 5) {
+        intensity = "990000";
+      }
+      else if (features[i].properties.mag > 4.5) {
+        intensity = "#ff0000";
+      }
+      else if (features[i].properties.mag > 4) {
+        intensity = "#ff751a";
+      }
+      else if (features[i].properties.mag > 3.5) {
+        intensity = "#ffa366";
       }
       else if (features[i].properties.mag > 3) {
-        intensity = "blue";
+        intensity = "#ff6666";
       }
-      else if (features[i].properties.mag > 1.7) {
-        intensity = "red";
+      else if (features[i].properties.mag > 2.5) {
+        intensity = "#ff9999";
+      }
+      else if (features[i].properties.mag > 2) {
+        intensity = "#ff9933";
+      }
+      else if (features[i].properties.mag > 1.5) {
+        intensity = "#ffbf80";
+      }
+      else if (features[i].properties.mag > 1) {
+        intensity = "#ffff99";
       }
       else {
-        intensity = "green";
+        intensity = "#ffffcc";
       }
       console.log("Earthquake", i);
       console.log(features[i].properties.mag);
@@ -37,7 +60,10 @@ d3.json(queryUrl, function(data) {
       earthquakeCoords.push(
         L.circle([features[i].geometry.coordinates[1],
           features[i].geometry.coordinates[0]], {
-            color: intensity,
+            fillOpacity: 0.75,
+            color: "black",
+            fillColor: intensity,
+            weight: 1,
             radius: markerSize(features[i].properties.mag * 200)
           }).bindPopup("<p>" + "<b>LOCATION:</b> " + features[i].properties.place + "<br>" 
                     + "<b>MAGNITUDE:</b> " + features[i].properties.mag + "<br>"
@@ -84,10 +110,26 @@ d3.json(queryUrl, function(data) {
         38, -97
       ],
       zoom: 5,
-      layers: [light, earthquakeLayer]
+      layers: [dark, earthquakeLayer]
     });
    
     L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+    
+    // Set up the legend
+    var legend = L.control({ position: "bottomright" });
+    
+    legend.onAdd = function() {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML =
+      "<p class='legend green'> Magnitude < 1.0 </p>" +
+      "<p class='legend yellow'> Magnitude < 2.5 </p>" +
+      "<p class='legend orange'> Magnitude < 4.5 </p>" + 
+      "<p class='legend red'> Magnitude = 4.5+ </p>";
+      return div;
+    };
+
+    // Adding legend to the map
+    legend.addTo(myMap);
 
 }); // end of d3.json
 
@@ -109,7 +151,7 @@ d3.json(queryUrl, function(data) {
 
 
 
-
+// FIRST CODE
 // function createFeatures(earthquakeData) {
 
 //     // Define a function we want to run once for each feature in the features array
