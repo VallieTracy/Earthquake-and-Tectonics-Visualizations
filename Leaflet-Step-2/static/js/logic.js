@@ -1,4 +1,5 @@
-var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
+// var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
+var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 d3.json(platesUrl, function(plate) {
 
@@ -8,11 +9,71 @@ d3.json(platesUrl, function(plate) {
   var lineCoords = [];
 
   for (var i = 0; i < feature.length; i++) {
-    lineCoords.push(
-      L.polyline([feature[i].geometry.coordinates])
+      var coords = feature[i].geometry.coordinates;
+      console.log("coords[0]:", coords[0]);
+      
+      lineCoords.push(
+      L.polyline([feature[i].geometry.coordinates], {
+        color: "red"
+      })
     );
   }
-  console.log(lineCoords);
+  console.log("lineCoords:", lineCoords);
+  console.log("firstLat:", feature[0].geometry.coordinates[0][1]);
+  console.log("firstLon:", feature[0].geometry.coordinates[0][0]);
+  console.log("2ndLat:", feature[0].geometry.coordinates[1][1]);
+  console.log("2ndLon:", feature[0].geometry.coordinates[1][0]);
+  console.log("lastLat:", feature[0].geometry.coordinates[16][1]);
+  
+  
+
+  // Define variables for our tile layers
+  var satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.satellite",
+    accessToken: API_KEY
+  });
+
+  var dark = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.dark",
+    accessToken: API_KEY
+  });
+
+  var light = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.light",
+    accessToken: API_KEY
+  });
+
+  var platesLayer = L.layerGroup(lineCoords);
+
+  // Only one base layer can be shown at a time
+  var baseMaps = {
+    Satellite: satellite,
+    Dark: dark,
+    Light: light
+  };
+
+  // Overlays that may be toggled on or off
+  var overlayMaps = {
+    "Tectonic Plates": platesLayer
+  };
+
+  // Create our map, default will be dark and earthquakeLayer
+  var myMap = L.map("map", {
+    center: [
+      38, -97
+    ],
+    zoom: 5,
+    layers: [light, platesLayer]
+  });
+
+  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+
 
 }); // end of d3.json for platesUrl
 
