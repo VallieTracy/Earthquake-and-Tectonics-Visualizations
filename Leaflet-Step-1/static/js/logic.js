@@ -22,13 +22,13 @@ d3.json(queryUrl, function(data) {
       var intensity = "";
       
       if (features[i].properties.mag > 4.5) {
-        intensity = "#800000";
+        intensity = "#b30000";
       }
       else if (features[i].properties.mag > 3) {
-        intensity = "#e60000";
+        intensity = "#ff4000";
       }
       else if (features[i].properties.mag > 1.5) {
-        intensity = "#ff6600";
+        intensity = "#ff8000";
       }
       else {
         intensity = "#6699ff";

@@ -6,7 +6,7 @@ var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/
 
 // Function to determine marker size
 function markerSize(magnitude) {
-  return magnitude * 250;
+  return magnitude * 100;
 }
 
 d3.json(queryUrl, function(data) {
@@ -25,13 +25,13 @@ d3.json(queryUrl, function(data) {
       var intensity = "";
 
       if (features[i].properties.mag > 4.5) {
-        intensity = "#800000";
+        intensity = "#b30000";
       }
       else if (features[i].properties.mag > 3) {
-        intensity = "#e60000";
+        intensity = "#ff4000";
       }
       else if (features[i].properties.mag > 1.5) {
-        intensity = "#ff6600";
+        intensity = "#ff8000";
       }
       else {
         intensity = "#6699ff";
@@ -79,8 +79,8 @@ d3.json(queryUrl, function(data) {
 
     var plateStyle = {
       "color": "orange",
-      "weight": 5,
-      "opacity": 0.9
+      "weight": 1,
+      "opacity": .9
     };
 
     var platesLayer = L.geoJson(plate, {
