@@ -1,62 +1,76 @@
-// Define variables for our tile layers
-var satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 18,
-  id: "mapbox.satellite",
-  accessToken: API_KEY
-});
 
-var dark = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 18,
-  id: "mapbox.dark",
-  accessToken: API_KEY
-});
-
-var light = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 18,
-  id: "mapbox.light",
-  accessToken: API_KEY
-});
-
-// Only one base layer can be shown at a time
-var baseMaps = {
-  Satellite: satellite,
-  Dark: dark,
-  Light: light
-}
-
-// Create our map, default will be dark and earthquakeLayer
-var myMap = L.map("map", {
-  center: [
-    38, -97
-  ],
-  zoom: 5
-});
-
-satellite.addTo(myMap);
-dark.addTo(myMap);
-light.addTo(myMap);
-
-// var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
 var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 d3.json(platesUrl, function(plate) {
+  
+
+  
+
+ 
+  
+  
+
+
+  // Define variables for our tile layers
+  var satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.satellite",
+    accessToken: API_KEY
+  });
+
+  var dark = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.dark",
+    accessToken: API_KEY
+  });
+
+  var light = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.light",
+    accessToken: API_KEY
+  });
+
   var plateStyle = {
     "color": "orange",
     "weight": 5,
     "opacity": 0.9
   };
+
   var platesLayer = L.geoJson(plate, {
     style: plateStyle
   });
-  platesLayer.addTo(myMap);
-  var overlays = {
-    Tectonic_Plates: platesLayer
-  };
-  L.control.layers(baseMaps, overlays).addTo(myMap);
+
+  // Only one base layer can be shown at a time
+  var baseMaps = {
+    Satellite: satellite,
+    Dark: dark,
+    Light: light
+  }
+
+  // Overlays that may be toggled on or off
+  var overlayMaps = {
+    "Tectonic Plates": platesLayer
+  }; 
+
+  // Create our map, default will be dark and earthquakeLayer
+  var myMap = L.map("map", {
+    center: [
+      38, -97
+    ],
+    zoom: 5,
+    layers: [dark, platesLayer]
+  });
+
+  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+
 });
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
