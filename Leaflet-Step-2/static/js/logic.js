@@ -1,12 +1,12 @@
 // Earthquakes url
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Tectonic plates url
 var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 // Function to determine marker size
 function markerSize(magnitude) {
-  return magnitude * 100;
+  return magnitude * 250;
 }
 
 d3.json(queryUrl, function(data) {
@@ -25,16 +25,16 @@ d3.json(queryUrl, function(data) {
       var intensity = "";
 
       if (features[i].properties.mag > 4.5) {
-        intensity = "#b30000";
+        intensity = "#9b0202";
       }
       else if (features[i].properties.mag > 3) {
-        intensity = "#ff4000";
+        intensity = "red";
       }
       else if (features[i].properties.mag > 1.5) {
-        intensity = "#ff8000";
+        intensity = "rgb(241, 131, 4)";
       }
       else {
-        intensity = "#6699ff";
+        intensity = "rgb(250, 193, 4)"; //#6699ff
       }
 
       // Push earthquake coords and make circles + popups
@@ -58,28 +58,35 @@ d3.json(queryUrl, function(data) {
     // Define variables for our tile layers
     var satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-      maxZoom: 18,
+      maxZoom: 7,
       id: "mapbox.satellite",
       accessToken: API_KEY
     });
 
     var dark = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-      maxZoom: 18,
+      maxZoom: 7,
       id: "mapbox.dark",
       accessToken: API_KEY
     });
 
     var light = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-      maxZoom: 18,
+      maxZoom: 7,
       id: "mapbox.light",
       accessToken: API_KEY
     });
 
+    var terrain = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 7,
+      id: "mapbox.terrain-rgb",
+      accessToken: API_KEY
+    });
+
     var plateStyle = {
-      "color": "orange",
-      "weight": 1,
+      "color": "#4d4dff", // #4d4dff
+      "weight": 2,
       "opacity": .9
     };
 
@@ -93,7 +100,8 @@ d3.json(queryUrl, function(data) {
     var baseMaps = {
       Satellite: satellite,
       Dark: dark,
-      Light: light
+      Light: light,
+      Terrain: terrain
     }
 
     // Overlays that may be toggled on or off
@@ -105,13 +113,29 @@ d3.json(queryUrl, function(data) {
     // Create our map, default will be dark and earthquakeLayer
     var myMap = L.map("map", {
       center: [
-        38, -97
+        38, -17
       ],
-      zoom: 5,
-      layers: [dark, earthquakeLayer]
+      zoom: 2,
+      layers: [satellite, platesLayer]
     });
 
     L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+
+    // Set up the legend
+    var legend = L.control({ position: "bottomright" });
+    
+    legend.onAdd = function() {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML =
+      "<p class='legend fourfive'> Magnitude > 4.5 </p>" +
+      "<p class='legend three'> Magnitude > 3 </p>" +
+      "<p class='legend onefive'> Magnitude > 1.5 </p>" + 
+      "<p class='legend under'> Magnitude < 1.5 </p>";
+      return div;
+    };
+
+    // Adding legend to the map
+    legend.addTo(myMap); 
 
   });
 });
