@@ -1,5 +1,5 @@
 # Earthquake Data Visualization    
-### *Prepared for the United States Geological Survey (USGS), courtesy of Vallie Tracy*              
+*Prepared for the United States Geological Survey (USGS), courtesy of Vallie Tracy*              
 
 ![usgs1](/FinishedProduct/usgs1.PNG)     
      
