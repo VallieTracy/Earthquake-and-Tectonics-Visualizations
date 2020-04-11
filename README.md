@@ -1,5 +1,5 @@
-# Earthquake Data Visualization    
-## *Work performed for the United States Geological Survey (USGS)*              
+# United States Geological Survery (USGS) 
+# Earthquake Data Visualization
 
 ![usgs1](/FinishedProduct/usgs1.PNG)     
      
