@@ -1,5 +1,5 @@
 # United States Geological Survery (USGS) 
-# Earthquake Data Visualization
+## Earthquake Data Visualization
 
 ![usgs1](/FinishedProduct/usgs1.PNG)     
      
