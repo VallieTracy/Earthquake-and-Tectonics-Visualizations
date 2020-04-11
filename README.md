@@ -1,2 +1,2 @@
 
-![usgs1](relative/path/to/img.jpg?raw=true "Title")
+![usgs1](VallieTracy/leaflet-challenge/blob/master/FinishedProduct/usgs1.PNG)
