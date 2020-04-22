@@ -1,5 +1,5 @@
 // Store API endpoint inside queryUrl
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 
 // Function to determine marker size
 function markerSize(magnitude) {
@@ -11,6 +11,7 @@ d3.json(queryUrl, function(data) {
     
     // Create variable to hold the array of objects
     var features = data.features;
+    console.log("features/states:", features);
 
     // Create empty list to hold earthquake coordinates
     var earthquakeCoords = [];
