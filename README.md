@@ -32,3 +32,5 @@ With better visualizations, a company can bring more of both novel and repeat we
 <br>
 #### AN EXAMPLE POP-UP:               
 ![usgs1](/FinishedProduct/usgs_popup.PNG) 
+
+*NOTE: Leaflet-Step-1 contains just work for the earthquakes, Leaflet-Step-2 contains the same code as Step-1, just with tectonic plates added in.*
