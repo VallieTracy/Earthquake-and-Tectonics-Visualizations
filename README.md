@@ -27,13 +27,13 @@ With better visualizations, a company can bring more of both novel and repeat we
 #### THE DEFAULT HOMEPAGE VISUALIZATION:       
                  
 ![usgs1](/FinishedProduct/usgs_default.PNG) 
+
 <br>
-<br>
-2.) JUST THE TECTONICS WITH A 'LIGHT' TILE LAYER:           
+#### JUST THE TECTONICS WITH A 'LIGHT' TILE LAYER:           
 <br>                   
 ![usgs1](/FinishedProduct/usgs_only_tectonics.PNG) 
+
 <br>
-<br>
-3.) AN EXAMPLE POP-UP:               
+#### AN EXAMPLE POP-UP:               
 <br>                       
 ![usgs1](/FinishedProduct/usgs_popup.PNG) 
