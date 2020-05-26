@@ -5,9 +5,12 @@
 *Visit the FinishedProduct folder to see some sample screenshots of my work, or simply click [here](https://github.com/VallieTracy/leaflet-challenge/tree/master/FinishedProduct "FinishedProduct").*     
 
 ## Overview     
-Welcome to the United States Geological Survey, or USGS for short! The USGS is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment; and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. As a new hire, you will be helping them out with an exciting new project! 
-                      
-The USGS is interested in building a new set of tools that will allow them visualize their earthquake data. They collect a massive amount of data from all over the world each day, but they lack a meaningful way of displaying it. Their hope is that being able to visualize their data will allow them to better educate the public and other government organizations (and hopefully secure more funding) on issues facing our planet.      
+The United States Geological Survey (USGS) is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment, and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. 
+
+In this repo, I visualized their earthquake data.  They collect a massive amount of data from all over the world each day, and store it in GeoJSON format, ranging from just the past hour, all the way to the past 30 days.  They further break it down by earthquake magnitude. For my visualization work, I looked at all magnitudes over the most recent 7 days.
+
+With better visualizations, a company can bring more of both novel and repeat webpage visitors.  It can be more engaging, which can keep a user on the webpage longer.  In an instance of a non-profit organization such as the USGS, it can increase donations.  I also worked to make the visualizations appealing to both users with minimal earthquake knowledge, but also to have data which geographic scholars might find helpful.
+     
 
 ## Data Sets Used      
 * USGS: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson    
