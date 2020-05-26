@@ -25,15 +25,10 @@ With better visualizations, a company can bring more of both novel and repeat we
 
 ## A few example Visualizations
 #### THE DEFAULT HOMEPAGE VISUALIZATION:       
-                 
 ![usgs1](/FinishedProduct/usgs_default.PNG) 
-
 <br>
 #### JUST THE TECTONICS WITH A 'LIGHT' TILE LAYER:           
-<br>                   
 ![usgs1](/FinishedProduct/usgs_only_tectonics.PNG) 
-
 <br>
 #### AN EXAMPLE POP-UP:               
-<br>                       
 ![usgs1](/FinishedProduct/usgs_popup.PNG) 
