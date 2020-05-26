@@ -24,8 +24,8 @@ With better visualizations, a company can bring more of both novel and repeat we
 * Mapbox API
 
 ## A few example Visualizations
-1.) THE DEFAULT HOMEPAGE VISUALIZATION:       
-<br>                 
+#### THE DEFAULT HOMEPAGE VISUALIZATION:       
+                 
 ![usgs1](/FinishedProduct/usgs_default.PNG) 
 <br>
 <br>
