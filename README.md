@@ -9,7 +9,7 @@ The United States Geological Survey (USGS) is responsible for providing scientif
 
 In this repo, I visualized their earthquake data.  They collect a massive amount of data from all over the world each day, and store it in GeoJSON format, ranging from just the past hour, all the way to the past 30 days.  They further break it down by earthquake magnitude. For my visualization work, I looked at all magnitudes over the most recent 7 days.
 
-With better visualizations, a company can bring more of both novel and repeat webpage visitors.  It can be more engaging, which can keep a user on the webpage longer.  In an instance of a non-profit organization such as the USGS, it can increase donations.   I also worked to make the visualizations appealing to a broad user base, including those with minimal earthquake knowledge, but also geographic scholars.  I accomplished the above tasks thru my use of color schemes, chosen pop-up information, overlay maps, having a variety of mapping combinations available, and overall layout and scaling. Visit the `FinishedProduct` folder to see some sample screenshots of my work, or simply click [here](https://github.com/VallieTracy/leaflet-challenge/tree/master/FinishedProduct "FinishedProduct").  
+With better visualizations, a company can bring more of both novel and repeat webpage visitors.  It can be more engaging, which can keep a user on the webpage longer.  In an instance of a non-profit organization such as the USGS, it can increase donations.   I also worked to make the visualizations appealing to a broad user base, including those with minimal earthquake knowledge, but also geographic scholars.  I accomplished the above tasks thru my use of color schemes, chosen pop-up information, overlay maps, having a variety of mapping combinations available, and overall layout and scaling.  Scroll below to see some example visualizations.  
      
 
 ## Data Sets Used      
@@ -23,6 +23,10 @@ With better visualizations, a company can bring more of both novel and repeat we
 * HTML    
 * Mapbox API
 
-![usgs1](/FinishedProduct/usgs_default.PNG) 
-![usgs1](/FinishedProduct/usgs_only_tectonics.PNG) 
+## A few example Visualizations
+### 1.)
+![usgs1](/FinishedProduct/usgs_default.PNG)      
+### 2.)     
+![usgs1](/FinishedProduct/usgs_only_tectonics.PNG)      
+### 3.)
 ![usgs1](/FinishedProduct/usgs_popup.PNG) 
