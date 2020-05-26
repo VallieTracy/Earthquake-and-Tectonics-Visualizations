@@ -24,9 +24,11 @@ With better visualizations, a company can bring more of both novel and repeat we
 * Mapbox API
 
 ## A few example Visualizations
-### 1.)
-![usgs1](/FinishedProduct/usgs_default.PNG)      
-### 2.)     
-![usgs1](/FinishedProduct/usgs_only_tectonics.PNG)      
-### 3.)
+#### 1.) The default homepage visualization: 
+![usgs1](/FinishedProduct/usgs_default.PNG) 
+<br>
+#### 2.) Just the tectonics with a 'light' tile layer:   
+![usgs1](/FinishedProduct/usgs_only_tectonics.PNG) 
+<br>
+#### 3.) An example pop-up:
 ![usgs1](/FinishedProduct/usgs_popup.PNG) 
